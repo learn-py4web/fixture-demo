@@ -32,11 +32,18 @@ from py4web.utils.url_signer import URLSigner
 from .models import get_user_email
 
 @action('index')
-@action.uses('index.html', db, auth)
+@action.uses('index.html', db, auth.user)
 def index():
     return dict(
         # COMPLETE: return here any signed URLs you need.
         my_callback_url = URL('my_callback'),
+    )
+    
+@action('admin')
+@action.uses('admin.html', db, auth.user)
+def admin():
+    return dict(
+        message="Welcome admin",
     )
 
 @action('my_callback')
