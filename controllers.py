@@ -31,14 +31,12 @@ from .common import db, session, T, cache, auth, logger, authenticated, unauthen
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_email
 
-url_signer = URLSigner(session)
-
 @action('index')
-@action.uses('index.html', db, auth, url_signer)
+@action.uses('index.html', db, auth)
 def index():
     return dict(
         # COMPLETE: return here any signed URLs you need.
-        my_callback_url = URL('my_callback', signer=url_signer),
+        my_callback_url = URL('my_callback'),
     )
 
 @action('my_callback')
