@@ -30,6 +30,10 @@ from yatl.helpers import A
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_email
+from .settings import ADMIN_LIST
+from .admin_fixture import Admin
+
+admin = Admin(auth, ADMIN_LIST)
 
 @action('index')
 @action.uses('index.html', db, auth.user)
@@ -40,7 +44,7 @@ def index():
     )
     
 @action('admin')
-@action.uses('admin.html', db, auth.user)
+@action.uses('admin.html', db, auth.user, admin)
 def admin():
     return dict(
         message="Welcome admin",

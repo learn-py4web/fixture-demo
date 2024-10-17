@@ -93,3 +93,5 @@ try:
     from .settings_private import *
 except (ImportError, ModuleNotFoundError):
     pass
+
+ADMIN_LIST = ["luca@ucsc.edu"]
