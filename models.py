@@ -20,4 +20,12 @@ def get_time():
 #
 ## always commit your models to avoid problems later
 
+db.define_table(
+    'sighting',
+    Field('user_email', default=get_user_email),
+    Field('quantity', 'integer', default=1),
+    Field('species'),   
+    Field('last_updated', 'datetime', update=get_time),             
+    )
+
 db.commit()

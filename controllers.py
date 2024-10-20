@@ -32,16 +32,20 @@ from py4web.utils.url_signer import URLSigner
 from .models import get_user_email
 from .settings import ADMIN_LIST
 from .admin_fixture import Admin
+from .local_storage_fixture import LocalStorageDemo
 
 admin = Admin(auth, ADMIN_LIST)
+local_storage_demo = LocalStorageDemo()
+
 
 @action('index')
-@action.uses('index.html', db, auth.user)
+@action.uses('index.html', db, auth.user, local_storage_demo)
 def index():
     return dict(
         # COMPLETE: return here any signed URLs you need.
         my_callback_url = URL('my_callback'),
     )
+
     
 @action('admin')
 @action.uses('admin.html', db, auth.user, admin)
@@ -49,6 +53,7 @@ def admin():
     return dict(
         message="Welcome admin",
     )
+
 
 @action('my_callback')
 @action.uses() # Add here things like db, auth, etc.
